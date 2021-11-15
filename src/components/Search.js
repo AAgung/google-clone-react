@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import { Button } from '@material-ui/core';
@@ -8,17 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import './Search.css';
 
 function Search({ hideButtons = false }) {
-  const [{}, dispatch] = useStateValue();
-  const [term, setTerm] = useState('');
+  const [{ term }, dispatch] = useStateValue();
+  const [searchTerm, setSearchTerm] = useState(term ?? '');
   const navigate = useNavigate();
-
   const search = (e) => {
     e.preventDefault();
-    console.log('search');
 
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
-      term: term,
+      term: searchTerm,
     });
 
     navigate('/search');
@@ -28,7 +26,7 @@ function Search({ hideButtons = false }) {
     <form className="search">
       <div className="search__input">
         <SearchIcon className="search__inputIcon" />
-        <input value={term} onChange={(e) => setTerm(e.target.value)} />
+        <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}  />
         <MicIcon />
       </div>
 
